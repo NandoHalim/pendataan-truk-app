@@ -2,8 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Helpers */
-.card { @apply bg-white border rounded-2xl shadow-sm; }
-.card-header { @apply px-4 pt-3 pb-1; }
-.card-title { @apply text-sm font-semibold; }
-.card-content { @apply p-4; }
+/* Pola layout umum */
+html, body, #root {
+  height: 100%;
+}

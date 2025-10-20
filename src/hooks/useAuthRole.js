@@ -1,8 +1,7 @@
-import { useMemo } from 'react'
-// Stub: ganti dengan pembacaan meta Supabase auth.user
-export function useAuthRole(user){ 
-  // user?.role could be 'admin' | 'petugas'
-  const role = user?.role || 'petugas'
-  const showSettings = role !== 'admin' // sesuai requirement
-  return useMemo(()=>({ role, showSettings }),[role, showSettings])
+import { useAuth } from "../context/AuthContext.jsx";
+
+export default function useAuthRole() {
+  const { role, user, isAuthenticated } = useAuth();
+  const isAdmin = role === "admin";
+  return { role, isAdmin, user, isAuthenticated };
 }

@@ -1,17 +1,34 @@
-import React from 'react'
-export default function BottomNav({ items, value, onChange, showSettings }){
-  const cols = showSettings ? 'grid-cols-4' : 'grid-cols-3'
+import { NavLink, useLocation } from "react-router-dom";
+
+const tabs = [
+  { to: "/dashboard", label: "Dashboard", icon: "🏠" },
+  { to: "/trucks", label: "Truk", icon: "🚛" },
+  { to: "/inspections", label: "Inspeksi", icon: "🧾" },
+  { to: "/reports", label: "Laporan", icon: "📊" },
+  { to: "/settings", label: "Pengaturan", icon: "⚙️" },
+];
+
+export default function BottomNav() {
+  const { pathname } = useLocation();
   return (
-    <nav className="fixed bottom-0 left-0 right-0 md:hidden bg-white border-t">
-      <div className={`max-w-6xl mx-auto grid ${cols} text-xs`}>
-        {items.map(it => (
-          <button key={it.k} aria-label={it.label}
-            onClick={()=>onChange(it.k)}
-            className={`py-3 ${value===it.k ? 'text-white bg-emerald-600' : 'text-slate-700'}`}>
-            {it.label}
-          </button>
-        ))}
-      </div>
+    <nav className="fixed bottom-0 inset-x-0 z-30 border-t border-slate-200 bg-white/90 backdrop-blur">
+      <ul className="mx-auto max-w-5xl grid grid-cols-5">
+        {tabs.map((t) => {
+          const active = pathname === t.to;
+          return (
+            <li key={t.to}>
+              <NavLink
+                to={t.to}
+                className={`flex flex-col items-center justify-center py-2 text-xs
+                  ${active ? "text-blue-600 font-semibold" : "text-slate-500"}`}
+              >
+                <span className="text-lg leading-none">{t.icon}</span>
+                <span className="mt-0.5">{t.label}</span>
+              </NavLink>
+            </li>
+          );
+        })}
+      </ul>
     </nav>
-  )
+  );
 }

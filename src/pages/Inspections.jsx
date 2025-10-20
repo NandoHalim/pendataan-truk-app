@@ -1,5 +1,8 @@
-import React from 'react'
-import ChecklistCard from '@/components/inspections/ChecklistCard'
-export default function Inspections({ trucks, selectedTruck, setSelectedTruck }){
-  return <ChecklistCard trucks={trucks} selectedTruck={selectedTruck} setSelectedTruck={setSelectedTruck} />
+export default function Inspections() {
+  return (
+    <section className="space-y-3">
+      <h2 className="text-lg font-semibold">Inspeksi</h2>
+      <p className="text-sm text-slate-500">Checklist & riwayat inspeksi di sini.</p>
+    </section>
+  );
 }
