@@ -1,4 +1,5 @@
-import { supabase } from '../api/supabaseClient'
+import { supabase } from '../../api/supabaseClient.js'
+
 
 const mockTrucks = [
   { id:1, nopol:'DD 1234 AB', wilayah:'Maros', agen:'Agen Alifa', jenis:'Colt Diesel', tahun:2012, kir_exp:'2025-12-10', stnk_exp:'2025-11-05' },

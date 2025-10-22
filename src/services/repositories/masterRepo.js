@@ -1,4 +1,5 @@
-import { supabase } from '../api/supabaseClient'
+import { supabase } from '../../api/supabaseClient.js'
+
 
 export async function listWilayah(){
   if (!supabase) return [
