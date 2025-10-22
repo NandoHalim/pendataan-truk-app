@@ -1,150 +1,141 @@
 # 🚛 Pendataan Truk App
 
-Aplikasi web untuk **pendataan truk, inspeksi kendaraan, dan pelaporan operasional**, dibangun dengan teknologi **React + Vite + Supabase** dan desain **mobile-first** menggunakan Tailwind CSS serta komponen modular.
+Aplikasi **Pendataan Truk** adalah sistem web berbasis **React + Vite + Supabase** untuk mengelola data kendaraan (truk), wilayah penyaluran, agen, dan inspeksi berkala.  
+Proyek ini dirancang dengan pendekatan modular, mobile-first, dan mudah dikembangkan.
 
 ---
 
-## 🧱 **Struktur Proyek**
+## 🧩 Tech Stack
+| Layer | Teknologi |
+|-------|------------|
+| Frontend | React 18, Vite, React Router DOM |
+| UI Library | TailwindCSS |
+| Backend | Supabase (PostgreSQL + Row Level Security) |
+| Hosting | Vercel |
+| Deployment | SPA Rewrite (via `vercel.json`) |
 
+---
+
+## 📁 Struktur Folder
 ```
 pendataan-truk-app/
-├── public/
-│   └── favicon.svg
-│
-├── src/
-│   ├── api/
-│   │   └── supabaseClient.js             # Inisialisasi koneksi Supabase
-│   │
-│   ├── components/                       # Komponen modular dan reusable
-│   │   ├── inspections/
-│   │   │   └── ChecklistCard.jsx         # Kartu checklist inspeksi
-│   │   ├── layout/
-│   │   │   └── AppLayout.jsx             # Layout utama dengan navigasi bawah
-│   │   ├── shared/
-│   │   │   ├── BottomNav.jsx             # Navigasi bawah (mobile)
-│   │   │   ├── ExpiryBadge.jsx           # Penanda masa berlaku
-│   │   │   └── KpiCard.jsx               # Kartu KPI ringkas
-│   │   ├── trucks/
-│   │   │   ├── TruckForm.jsx             # Form tambah/edit data truk
-│   │   │   └── TruckTable.jsx            # Tabel daftar truk
-│   │   └── ui/
-│   │       ├── Button.jsx                # Tombol kustom
-│   │       ├── Card.jsx                  # Kartu kontainer
-│   │       └── Responsive.jsx            # Grid dan layout responsif
-│   │
-│   ├── context/
-│   │   ├── AuthContext.jsx               # Konteks autentikasi pengguna
-│   │   └── SettingsContext.jsx           # Konteks konfigurasi aplikasi
-│   │
-│   ├── hooks/
-│   │   ├── useAuthRole.js                # Hook untuk role pengguna
-│   │   ├── useDropdowns.js               # Hook dropdown dinamis
-│   │   ├── useInspections.js             # Hook data inspeksi
-│   │   └── useTrucks.js                  # Hook data truk
-│   │
-│   ├── pages/                            # Halaman utama aplikasi
-│   │   ├── Dashboard.jsx
-│   │   ├── Inspections.jsx
-│   │   ├── Reports.jsx
-│   │   ├── Settings.jsx
-│   │   └── Trucks.jsx
-│   │
-│   ├── services/
-│   │   ├── DataService.js                # Pusat logika bisnis & akses data
-│   │   └── repositories/
-│   │       ├── inspectionsRepo.js        # Query terkait inspeksi
-│   │       ├── masterRepo.js             # Master data umum
-│   │       └── trucksRepo.js             # Query terkait truk
-│   │
-│   ├── styles/
-│   │   └── globals.css                   # Style global + import Tailwind
-│   │
-│   ├── utils/
-│   │   ├── constants.js                  # Konstanta global
-│   │   ├── date.js                       # Utilitas tanggal
-│   │   ├── logger.js                     # Logging helper
-│   │   └── validators.js                 # Validator input/form
-│   │
-│   ├── App.jsx                           # Root komponen aplikasi
-│   ├── main.jsx                          # Entry point React + Router
-│   └── theme.js                          # Konfigurasi tema MUI
-│
-├── .env.example                          # Template environment variables
-├── .gitignore
 ├── index.html
 ├── package.json
-├── postcss.config.js
-├── tailwind.config.js
-├── vercel.json
 ├── vite.config.js
-└── README.md
+├── vercel.json                # Rewrite SPA untuk Vercel
+├── public/
+│   └── icons/
+├── src/
+│   ├── api/
+│   │   └── supabaseClient.js  # Inisialisasi koneksi Supabase
+│   ├── components/
+│   │   ├── layout/            # Komponen global (navbar, header, dsb)
+│   │   ├── shared/            # Komponen reusable (KpiCard, Badge, dll)
+│   │   ├── trucks/            # Form & tabel data truk
+│   │   └── inspections/       # Komponen checklist inspeksi
+│   ├── context/               # Context global (Auth, Settings)
+│   ├── hooks/                 # Custom React hooks
+│   ├── pages/                 # Halaman utama aplikasi
+│   ├── services/
+│   │   ├── DataService.js     # Layer logika bisnis utama
+│   │   └── repositories/      # Akses data ke tabel Supabase
+│   ├── utils/                 # Helper & constants
+│   ├── styles/                # Global CSS (Tailwind)
+│   ├── App.jsx                # Root app (routing)
+│   └── main.jsx               # Entry point
 ```
 
 ---
 
-## ⚙️ **Teknologi Utama**
-| Kategori | Teknologi |
-|-----------|------------|
-| Frontend Framework | **React + Vite** |
-| UI Framework | **Tailwind CSS**, komponen modular custom |
-| Backend & Database | **Supabase** |
-| State Management | React Context API |
-| Routing | React Router DOM |
-| Deployment | Vercel |
-| Lainnya | Mobile-First Design, Modular Hooks, Repository Pattern |
+## ⚙️ Setup & Instalasi
 
----
-
-## 🚀 **Fitur Utama**
-- 📋 **Pendataan Truk** — tambah, ubah, dan lihat data truk.
-- 🔍 **Inspeksi & Checklist** — pencatatan hasil pemeriksaan kendaraan.
-- 📊 **Dashboard KPI** — menampilkan ringkasan kinerja operasional.
-- ⚙️ **Pengaturan Aplikasi** — konfigurasi preferensi pengguna.
-- 📱 **Desain Mobile-First** — optimal di layar kecil dengan bottom navigation.
-- 🧩 **Struktur Modular** — pemisahan logika bisnis & tampilan (MV-style).
-
----
-
-## 🧰 **Cara Menjalankan**
-1. Clone repositori:
-   ```bash
-   git clone https://github.com/username/pendataan-truk-app.git
-   cd pendataan-truk-app
-   ```
-
-2. Instal dependensi:
-   ```bash
-   npm install
-   ```
-
-3. Buat file `.env` berdasarkan `.env.example`:
-   ```bash
-   cp .env.example .env
-   ```
-   Isi dengan kredensial Supabase kamu.
-
-4. Jalankan proyek:
-   ```bash
-   npm run dev
-   ```
-
-5. Buka di browser:
-   ```
-   http://localhost:5173
-   ```
-
----
-
-## 📦 **Build & Deploy**
-Untuk build production:
+### 1️⃣ Clone Repository
 ```bash
-npm run build
+git clone https://github.com/<username>/pendataan-truk-app.git
+cd pendataan-truk-app
 ```
-Output akan tersimpan di folder `dist/`, siap untuk dideploy ke **Vercel** atau platform lain.
+
+### 2️⃣ Install Dependencies
+```bash
+npm install
+```
+
+### 3️⃣ Konfigurasi Environment
+Buat file `.env.local` di root proyek:
+```bash
+VITE_SUPABASE_URL=https://xxxxx.supabase.co
+VITE_SUPABASE_ANON_KEY=xxxxx
+```
+
+### 4️⃣ Jalankan di Lokal
+```bash
+npm run dev
+```
+Akses di: [http://localhost:5173](http://localhost:5173)
 
 ---
 
-## 🧑‍💻 **Kontributor**
-**Developer:** Nando Halim  
-📍 Indonesia  
-✉️ halimaprillia22@gmail.com
+## 🚀 Deployment (Vercel)
+Aplikasi ini sudah dikonfigurasi untuk Vercel SPA routing.
+
+**vercel.json:**
+```json
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
+```
+
+Langkah:
+1. Deploy ke Vercel (hubungkan repo GitHub).
+2. Set environment variables di Dashboard Vercel:
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_ANON_KEY`
+3. Jalankan redeploy.
+
+---
+
+## 🧠 Arsitektur Data (Supabase)
+Tabel utama:
+- `trucks` — data kendaraan
+- `wilayah` — wilayah distribusi
+- `agen` — data agen
+- `jenis_kendaraan` — master jenis truk
+- `truck_inspections` — hasil pemeriksaan kendaraan
+
+Fungsi dan trigger utama:
+- `propagate_wilayah_name()`
+- `propagate_agen_name()`
+- `propagate_jenis_name()`
+- `trucks_set_denorm_names()`
+
+Setiap perubahan nama di master otomatis memperbarui kolom denormalisasi di tabel `trucks`.
+
+---
+
+## 📊 Fitur Utama
+- CRUD Data Truk  
+- Data Master (Wilayah, Agen, Jenis Kendaraan)
+- Checklist Inspeksi
+- Validasi Input & Badge Masa Berlaku
+- Dashboard KPI (Omzet, Total Truk, Piutang, dll)
+- Mobile-first Layout dengan Bottom Navigation
+- Integrasi penuh dengan Supabase
+
+---
+
+## 🧩 Rencana Pengembangan
+- 📅 Laporan Inspeksi Mingguan / Bulanan
+- 📊 Analitik Dashboard
+- 🔐 Login / Role Management (Admin–User)
+- ☁️ Sinkronisasi Offline (IndexedDB)
+
+---
+
+## 🧑‍💻 Kontributor
+- **Nando Halim** — Fullstack Developer (React + Supabase)
+- OpenAI ChatGPT-5 — Asisten pengembang & dokumentasi teknis
